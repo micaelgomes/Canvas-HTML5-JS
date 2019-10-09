@@ -87,6 +87,12 @@ function hasInstersct(){
   return true;
 }
 
+function drawPolygonRealTime(){
+  if(pathClicks.length == 1){
+    
+  }
+}
+
 /*
  * Draw rectangle in canvas
  * @param color and array with (x, y) and base, height
@@ -107,6 +113,7 @@ function clearAll(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   pathClicks = [];
   enable_draw = true;
+  document.getElementById('real-polygon').style.backgroundColor = "#2A363B";
 }
 
 function clearScreen(){
@@ -150,6 +157,18 @@ function buttonPolygon(event){
     } else {
       alert("Only 2 point");
     }
+  } else {
+    alert("Reset to Draw!");
+  }
+}
+
+function buttonRPolygon(event){
+  if(enable_draw){
+    document.getElementById('real-polygon').style.backgroundColor = "red";
+    alert("this option allows you to draw in real time!");
+
+    drawPolygonRealTime();
+
   } else {
     alert("Reset to Draw!");
   }

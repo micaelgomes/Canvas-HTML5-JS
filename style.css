@@ -81,6 +81,12 @@
  	bottom: 9rem;
  }
 
+ .real-polygon {
+	bottom: 13rem;
+	background-color: #666;
+ }
+
+
  canvas {
  	box-shadow: 0px 0px 4px 0px #666;
  	cursor: crosshair;
