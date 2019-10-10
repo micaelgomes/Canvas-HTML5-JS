@@ -10,6 +10,7 @@ var ctx = canvas.getContext('2d');
 var pathClicks = [];
 
 let enable_draw = true;
+let enable_real = false;
 let witdthPoint = 2;
 
 document.getElementById('canvas').addEventListener('click', mouseLeftClick, false);
@@ -88,9 +89,38 @@ function hasInstersct(){
 }
 
 function drawPolygonRealTime(){
-  if(pathClicks.length == 1){
-    
+  var positionLastClick = getMousePosition(event);
+  pathClicks.push(positionLastClick);
+  
+  if(pathClicks.length <= 2){
+    let x = positionLastClick[0];
+    let y = positionLastClick[1];
+
+    drawPoint(x, y);
+  } else if (pickPonto(positionLastClick[0], positionLastClick[1], 5, pathClicks[0][0], pathClicks[0][1])){
+    clearScreen();
+    ctx.beginPath();
+    ctx.moveTo(pathClicks[0][0], pathClicks[0][1]);
+    pathClicks.forEach(getElement);
+    ctx.closePath();
+    ctx.stroke();
+    enable_real = false;
+  } else {
+    clearScreen();
+    ctx.beginPath();
+    ctx.moveTo(pathClicks[0][0], pathClicks[0][1]);
+    pathClicks.forEach(getElement);
+    ctx.stroke();
   }
+}
+
+function pickPonto(x1, y1, d, x2, y2){
+  if( ((x2 <= (x1 + d)) && (x2 >= (x1 - d))) && ((y2 <= (y1 + d)) && (y2 >= (y1 - d))) ){
+    console.log("pick");
+    return true;
+  }
+
+  return false;
 }
 
 /*
@@ -98,11 +128,15 @@ function drawPolygonRealTime(){
  * @param color and array with (x, y) and base, height
  */
 function drawBezier(){
-  clearScreen();
-  ctx.beginPath();
-  ctx.moveTo(pathClicks[0][0], pathClicks[0][1]);
-  ctx.bezierCurveTo(pathClicks[1][0], pathClicks[1][1], pathClicks[2][0], pathClicks[2][1], pathClicks[3][0], pathClicks[3][1]);
-  ctx.stroke();
+  if(pathClicks.length >=4){
+    clearScreen();
+    ctx.beginPath();
+    ctx.moveTo(pathClicks[0][0], pathClicks[0][1]);
+    ctx.bezierCurveTo(pathClicks[1][0], pathClicks[1][1], pathClicks[2][0], pathClicks[2][1], pathClicks[3][0], pathClicks[3][1]);
+    ctx.stroke();
+  } else {
+    alert('need 4 points!');
+  }
 }
 
 /*
@@ -113,7 +147,7 @@ function clearAll(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   pathClicks = [];
   enable_draw = true;
-  document.getElementById('real-polygon').style.backgroundColor = "#2A363B";
+  document.getElementById('real-polygon').style.backgroundColor = "#666";
 }
 
 function clearScreen(){
@@ -134,6 +168,10 @@ function mouseLeftClick(event){
     ctx.fillStyle = '#E84A5F';
     drawPoint(x, y);
   }
+
+  if(enable_real){
+    drawPolygonRealTime();
+  } 
 }
 
 function mouseRightClick(event){}
@@ -164,10 +202,11 @@ function buttonPolygon(event){
 
 function buttonRPolygon(event){
   if(enable_draw){
+    enable_draw = false;
+    enable_real = true;
+
     document.getElementById('real-polygon').style.backgroundColor = "red";
     alert("this option allows you to draw in real time!");
-
-    drawPolygonRealTime();
 
   } else {
     alert("Reset to Draw!");
