@@ -9,6 +9,15 @@ var ctx = canvas.getContext('2d');
 
 var pathClicks = [];
 
+let polygon = false;
+let line = false;
+let bezier = false;
+let circle = false;
+
+let translate = false;
+let rotate = false;
+let escale = false;
+
 let enable_draw = true;
 let enable_real = false;
 let witdthPoint = 2;
@@ -38,6 +47,7 @@ function drawPoint(mouseX, mouseY){
  * @param color and array with (x, y) and base, height
  */
 function drawLine(){
+  line = true;
   clearScreen();
   ctx.beginPath();
   ctx.moveTo(pathClicks[0][0], pathClicks[0][1]);
@@ -50,7 +60,8 @@ function drawLine(){
  * Draw rectangle in canvas
  * @param color and array with (x, y) and base, height
  */
-function drawCircle(mouseX, mouseY){
+function drawCircle(){
+  circle = true;
   // clearScreen();
   ctx.beginPath();
   ctx.arc(pathClicks[0][0], pathClicks[0][1], getRadius(), 0, 2*Math.PI);
@@ -69,6 +80,7 @@ function getRadius(){
  * @param color and array with (x, y) and base, height
  */
 function drawPolygon(){
+  polygon = true;
   clearScreen();
   ctx.beginPath();
   ctx.moveTo(pathClicks[0][0], pathClicks[0][1]);
@@ -128,6 +140,7 @@ function pickPonto(x1, y1, d, x2, y2){
  * @param color and array with (x, y) and base, height
  */
 function drawBezier(){
+  bezier = true;
   if(pathClicks.length >=4){
     clearScreen();
     ctx.beginPath();
@@ -147,6 +160,10 @@ function clearAll(){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   pathClicks = [];
   enable_draw = true;
+  polygon = false;
+  line = false;
+  circle = false;
+  bezier = false;
   document.getElementById('real-polygon').style.backgroundColor = "#666";
 }
 
@@ -159,7 +176,7 @@ function clearScreen(){
  */
 function mouseLeftClick(event){
   var positionLastClick = getMousePosition(event);
-  pathClicks.push(positionLastClick);
+  if(enable_draw) pathClicks.push(positionLastClick);
 
   if(enable_draw){
     let x = positionLastClick[0];
@@ -172,6 +189,60 @@ function mouseLeftClick(event){
   if(enable_real){
     drawPolygonRealTime();
   } 
+
+  if(translate){
+    clearScreen();
+    ctx.save();
+    ctx.translate(positionLastClick[0], positionLastClick[1]);
+    
+    if(polygon) drawPolygon();
+    else if(line) drawLine();
+    else if(circle) drawCircle();
+    else if(bezier) drawBezier();
+    else {
+      for(let i=0; i<pathClicks.length; i++){
+        drawPoint(pathClicks[i][0], pathClicks[i][1]);
+      }
+    }
+    ctx.restore();
+    translate = false;
+  }
+
+  if(rotate){
+    clearScreen();
+    ctx.save();
+    ctx.rotate(Math.PI/4);
+    
+    if(polygon) drawPolygon();
+    else if(line) drawLine();
+    else if(circle) drawCircle();
+    else if(bezier) drawBezier();
+    else {
+      for(let i=0; i<pathClicks.length; i++){
+        drawPoint(pathClicks[i][0], pathClicks[i][1]);
+      }
+    }
+    ctx.restore();
+    rotate = false;
+  }
+
+  if(escale){
+    clearScreen();
+    ctx.save();
+    ctx.scale(1.5,1.5);
+    
+    if(polygon) drawPolygon();
+    else if(line) drawLine();
+    else if(circle) drawCircle();
+    else if(bezier) drawBezier();
+    else {
+      for(let i=0; i<pathClicks.length; i++){
+        drawPoint(pathClicks[i][0], pathClicks[i][1]);
+      }
+    }
+    ctx.restore();
+    escale = false;
+  }
 }
 
 function mouseRightClick(event){}
@@ -241,4 +312,34 @@ function getMousePosition(event){
     mouseY = event.clientY;
 
     return [mouseX, mouseY];
+}
+
+function translation(){
+  if(!pathClicks.length < 1){
+    enable_draw = false;
+    translate = true;
+    alert("Click para transladar\n lembrando que será o ponto (0,0) translado para o ponto desejao");
+  } else {
+    alert("Não há nada desenhado");
+  }
+}
+
+function rotation(){
+  if(!pathClicks.length < 1){
+    enable_draw = false;
+    rotate = true;
+    alert("Click para rotacionar 45º em X");
+  } else {
+    alert("Não há nada desenhado");
+  }
+}
+
+function scale(){
+  if(!pathClicks.length < 1){
+    enable_draw = false;
+    escale = true;
+    alert("Click para escalar");
+  } else {
+    alert("Não há nada desenhado");
+  }
 }

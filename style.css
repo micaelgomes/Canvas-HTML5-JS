@@ -86,6 +86,17 @@
 	background-color: #666;
  }
 
+ .translation {
+	bottom: 17rem;
+ }
+
+ .rotation {
+	bottom: 19rem;
+ }
+
+ .escale {
+	bottom: 21rem;
+ }
 
  canvas {
  	box-shadow: 0px 0px 4px 0px #666;
