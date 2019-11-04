@@ -97,6 +97,28 @@
  .escale {
 	bottom: 21rem;
  }
+ 
+ .ppoint {
+	bottom: 25rem;
+ }
+
+ .pline {
+	bottom: 25rem;
+	right: 11rem;
+ }
+
+ .ppolygon {
+	bottom: 27rem;
+ }
+
+ .info {
+	top: 0;
+	bottom: auto;
+	box-shadow: none;
+	background-color: coral;
+	font-size: 12px;
+	padding: 10px;
+}
 
  canvas {
  	box-shadow: 0px 0px 4px 0px #666;

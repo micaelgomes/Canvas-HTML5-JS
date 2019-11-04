@@ -343,3 +343,26 @@ function scale(){
     alert("Não há nada desenhado");
   }
 }
+
+// Selection manage
+function selection(option){
+  if(!pathClicks.length < 1){
+    if (option === "point"){
+      alert("pickPoint selecionado!\nclick para selecionar");
+      selectPoint();
+    } else if (option === "line") {
+      alert("pickLine selecionado!\nclick para selecionar");
+      selectPoint();
+    } else if (option === "polygon") {
+      alert("pickPolygon selecionado!\nclick para selecionar");
+      selectPoint();
+    }
+
+  } else {
+    alert("não há nada desenhado\n\nDesenhe pontos para usar o pickPonto\nDesenhe Linhas para usar o pickLine\nDesenhe um poligono para usar pickPolygon");
+  }
+}
+
+function selectPoint(){
+
+}
