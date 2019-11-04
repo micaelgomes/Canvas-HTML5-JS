@@ -113,12 +113,22 @@
 
  .info {
 	top: 0;
+	right: 0;
 	bottom: auto;
 	box-shadow: none;
 	background-color: coral;
 	font-size: 12px;
 	padding: 10px;
-}
+	position: absolute;
+	text-decoration: unset;
+	color: white;
+	font-weight: 800;
+	border-bottom-left-radius: 15px;
+ }
+
+ .info:hover {
+	padding-right: 2rem;
+ }
 
  canvas {
  	box-shadow: 0px 0px 4px 0px #666;
