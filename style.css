@@ -43,8 +43,8 @@
  	background-color: #2A363B;
  	color: #FFF;
  	border-radius: 2rem;
- 	font-size: 18px;
- 	font-weight: 600;
+ 	font-size: 12px;
+ 	font-weight: 500;
  	margin: 1rem;
  	margin-top: 1rem;
  	box-shadow: 0px 0px 8px 0px #666;
@@ -61,54 +61,58 @@
  	background-color: #02A676; 
  }
 
+ .generate {
+	 background-color: salmon;
+	 right: 8rem; 
+ }
+
  .reset:hover {
  	background-color: #E84A5F;
  }
 
  .line {
- 	bottom: 3rem;
+ 	bottom: 2.5rem;
  }
 
  .polygon {
- 	bottom: 5rem;
+ 	bottom: 4rem;
  }
 
  .circle {
- 	bottom: 7rem;
+ 	bottom: 5.5rem;
  }
 
  .bezier {
- 	bottom: 9rem;
+ 	bottom: 7rem;
  }
 
  .real-polygon {
-	bottom: 13rem;
+	bottom: 10rem;
 	background-color: #666;
  }
 
  .translation {
-	bottom: 17rem;
+	bottom: 13rem;
  }
 
  .rotation {
-	bottom: 19rem;
+	bottom: 14.5rem;
  }
 
  .escale {
-	bottom: 21rem;
+	bottom: 16rem;
  }
  
  .ppoint {
-	bottom: 25rem;
+	bottom: 18.5rem;
  }
 
  .pline {
-	bottom: 25rem;
-	right: 11rem;
+	bottom: 20rem;
  }
 
  .ppolygon {
-	bottom: 27rem;
+	bottom: 21.5rem;
  }
 
  .info {

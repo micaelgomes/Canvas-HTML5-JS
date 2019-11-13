@@ -8,7 +8,7 @@
   </head> 
   <body>
     <main>
-      <h1 class="title">myCanvas<hr><small>V0.0.3</small></h1>
+      <h1 class="title">myCanvas<br><small>v0.0.7</small></h1>
       <canvas id="canvas" width="650" height="550"></canvas>
       <button class="ppolygon" onclick="selection('polygon')">pickPolygon</button>
       <button class="pline" onclick="selection('line')">pickLine</button>
@@ -17,11 +17,13 @@
       <button class="rotation" onclick="rotation()">Rotação - eixo X</button>
       <button class="escale" onclick="scale()">Escala</button>
       <button id="real-polygon" class="real-polygon" onclick="buttonRPolygon()">Real-Time Polygon</button>
+      <hr>
       <button class="bezier" onclick="buttonBezier()">Beziér</button>
       <button class="circle" onclick="buttonCircle()">Circle</button>
       <button class="polygon" onclick="buttonPolygon()">Polygon</button>
       <button class="line" onclick="buttonLine()">Line</button>
       <button class="reset" onclick="clearAll()">Reset</button>
+      <button class="generate" onclick="clearAll()">Generate Random Points</button>
 
       <a href="readme.html" class="info" target="_blank">info</a>
     </main>
