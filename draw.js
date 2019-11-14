@@ -514,3 +514,51 @@ function pickLine(x0, y0, x1, y1, cx, cy, tol) {
   } while (1);
   return false;
 }
+
+// Geometria Computacional
+function generate(){
+  if(enable_draw){
+    alert('Agora será desenhado os pontos no Canvas...');
+
+    for (let i = 0; i < 100; i++) {
+      coordinates = [];
+      coordinates[0] = Math.floor((Math.random() * 550) + 50);
+      coordinates[1] = Math.floor((Math.random() * 450) + 50);
+      pathClicks.push(coordinates);
+    }
+
+    for (let i = 0; i < pathClicks.length; i++) {
+      drawPoint(pathClicks[i][0], pathClicks[i][1]);
+    }
+
+    enable_draw = false;
+  } else {
+    alert('Reset to Draw!');
+  }
+}
+
+
+// ALgorithm to HullConvex
+function findHull() {
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  var hull = new ConvexHull();
+  hull.compute(points);
+  var indices = hull.getIndices();
+  if (indices && indices.length > 0) {
+    ctx.beginPath();
+    ctx.moveTo(points[indices[0]].x, points[indices[0]].y);
+    for (var i = 1; i < indices.length; i++) {
+      ctx.lineTo(points[indices[i]].x, points[indices[i]].y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = "rgba(200, 0, 0, 0.2)";
+    ctx.strokeStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fill();
+    ctx.stroke();
+    for (var i = 0; i < indices.length; i++) {
+      dot(ctx, points[indices[i]], "rgba(200, 0, 0, 0.8)");
+    }
+
+  }
+}

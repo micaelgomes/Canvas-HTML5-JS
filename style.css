@@ -44,7 +44,7 @@
  	color: #FFF;
  	border-radius: 2rem;
  	font-size: 12px;
- 	font-weight: 500;
+ 	font-weight: 600;
  	margin: 1rem;
  	margin-top: 1rem;
  	box-shadow: 0px 0px 8px 0px #666;
@@ -113,6 +113,10 @@
 
  .ppolygon {
 	bottom: 21.5rem;
+ }
+
+ .hull {
+	bottom: 24.5rem;
  }
 
  .info {

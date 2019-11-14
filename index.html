@@ -10,6 +10,7 @@
     <main>
       <h1 class="title">myCanvas<br><small>v0.0.7</small></h1>
       <canvas id="canvas" width="650" height="550"></canvas>
+      <button class="hull" onclick>Fecho Convexo</button>
       <button class="ppolygon" onclick="selection('polygon')">pickPolygon</button>
       <button class="pline" onclick="selection('line')">pickLine</button>
       <button class="ppoint" onclick="selection('point')">pickPoint</button>
@@ -23,7 +24,7 @@
       <button class="polygon" onclick="buttonPolygon()">Polygon</button>
       <button class="line" onclick="buttonLine()">Line</button>
       <button class="reset" onclick="clearAll()">Reset</button>
-      <button class="generate" onclick="clearAll()">Generate Random Points</button>
+      <button class="generate" onclick="generate()">Generate Random Points</button>
 
       <a href="readme.html" class="info" target="_blank">info</a>
     </main>
