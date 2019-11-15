@@ -10,7 +10,7 @@
     <main>
       <h1 class="title">myCanvas<br><small>v0.0.7</small></h1>
       <canvas id="canvas" width="650" height="550"></canvas>
-      <button class="hull" onclick>Fecho Convexo</button>
+      <button class="hull" onclick="findHull()">Fecho Convexo</button>
       <button class="ppolygon" onclick="selection('polygon')">pickPolygon</button>
       <button class="pline" onclick="selection('line')">pickLine</button>
       <button class="ppoint" onclick="selection('point')">pickPoint</button>
@@ -35,5 +35,6 @@
       <div> Disciplina: <small>Computação Gráfica</small> </div>
     </footer>
     <script src="draw.js"></script>
+    <script src="https://d3js.org/d3-polygon.v1.min.js"></script>
   </body>
 </html>

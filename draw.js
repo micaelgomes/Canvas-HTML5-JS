@@ -21,6 +21,7 @@ let translate = false;
 let rotate = false;
 let escale = false;
 
+let enable_hull = true;
 let enable_draw = true;
 let enable_real = false;
 let witdthPoint = 2;
@@ -518,7 +519,7 @@ function pickLine(x0, y0, x1, y1, cx, cy, tol) {
 // Geometria Computacional
 function generate(){
   if(enable_draw){
-    alert('Agora será desenhado os pontos no Canvas...');
+    // alert('Agora será desenhado os pontos no Canvas...');
 
     for (let i = 0; i < 100; i++) {
       coordinates = [];
@@ -537,28 +538,25 @@ function generate(){
   }
 }
 
+// Fecho Convexo
+function findHull(){
+  if(enable_hull){
+    if(pathClicks.length >= 3){
+      var hull = d3.polygonHull(pathClicks);
 
-// ALgorithm to HullConvex
-function findHull() {
-  var canvas = document.getElementById("canvas");
-  var ctx = canvas.getContext("2d");
-  var hull = new ConvexHull();
-  hull.compute(points);
-  var indices = hull.getIndices();
-  if (indices && indices.length > 0) {
-    ctx.beginPath();
-    ctx.moveTo(points[indices[0]].x, points[indices[0]].y);
-    for (var i = 1; i < indices.length; i++) {
-      ctx.lineTo(points[indices[i]].x, points[indices[i]].y);
+      ctx.strokeStyle = '#FF0000';
+      ctx.beginPath();
+      ctx.moveTo(hull[0][0], hull[0][1]);
+      hull.forEach(getElement);
+      ctx.closePath();
+      ctx.stroke();
+  
+      enable_hull = false;
+      enable_draw = false;
+    } else {
+      alert('Need 3 points!');
     }
-    ctx.closePath();
-    ctx.fillStyle = "rgba(200, 0, 0, 0.2)";
-    ctx.strokeStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.fill();
-    ctx.stroke();
-    for (var i = 0; i < indices.length; i++) {
-      dot(ctx, points[indices[i]], "rgba(200, 0, 0, 0.8)");
-    }
-
+  } else {
+    alert('Reset to Draw!');
   }
 }
