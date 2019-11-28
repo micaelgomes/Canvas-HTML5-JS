@@ -22,6 +22,8 @@ let rotate = false;
 let escale = false;
 
 let enable_hull = true;
+let enable_voronoi = true;
+let enable_delaunay = true;
 let enable_draw = true;
 let enable_real = false;
 let witdthPoint = 2;
@@ -532,7 +534,6 @@ function generate(){
       drawPoint(pathClicks[i][0], pathClicks[i][1]);
     }
 
-    enable_draw = false;
   } else {
     alert('Reset to Draw!');
   }
@@ -540,7 +541,7 @@ function generate(){
 
 // Fecho Convexo
 function findHull(){
-  if(enable_hull){
+  if(enable_hull && enable_draw){
     if(pathClicks.length >= 3){
       var hull = d3.polygonHull(pathClicks);
 
@@ -553,6 +554,75 @@ function findHull(){
   
       enable_hull = false;
       enable_draw = false;
+    } else {
+      alert('Need 3 points!');
+    }
+  } else {
+    alert('Reset to Draw!');
+  }
+}
+
+// voronoi
+function voronoi(){
+  if(enable_voronoi){
+    if(pathClicks.length >= 3){
+      var voronoi = d3.voronoi();
+      voronoi.extent([[0, 0], [canvas.width, canvas.height]]);
+      
+      var polygon_voronoi = voronoi(pathClicks).polygons();
+
+      ctx.strokeStyle = '#0000FF';
+      ctx.beginPath();
+      for(let i=0; i<polygon_voronoi.length; i++){
+        ctx.moveTo(polygon_voronoi[i][0][0], polygon_voronoi[i][0][1]);
+        for(let j=0; j<polygon_voronoi[i].length; j++){
+          ctx.lineTo(polygon_voronoi[i][j][0], polygon_voronoi[i][j][1]);
+        }
+      }
+      ctx.closePath();
+      ctx.stroke();
+
+      enable_voronoi = false;
+      enable_draw = false;
+    } else {
+      alert('Need 3 points!');
+    }
+  } else {
+    alert('Reset to Draw!');
+  }
+}
+
+// delaunay
+function delaunay(){
+  if(enable_delaunay && enable_draw){
+    if(pathClicks.length >= 3){
+      var voronoi = d3.voronoi();
+      voronoi.extent([[0, 0], [canvas.width, canvas.height]]);
+      
+      try {
+        var polygon_delaunay = voronoi(pathClicks).triangles();
+
+        console.log(polygon_delaunay);
+
+        ctx.strokeStyle = '#00FF00';
+        ctx.beginPath();
+        for(let i=0; i<polygon_delaunay.length; i++){
+          ctx.moveTo(polygon_delaunay[i][0][0], polygon_delaunay[i][0][1]);
+          for(let j=0; j<polygon_delaunay[i].length; j++){
+            ctx.lineTo(polygon_delaunay[i][j][0], polygon_delaunay[i][j][1]);
+          }
+          ctx.lineTo(polygon_delaunay[i][0][0], polygon_delaunay[i][0][1]);
+        }
+        ctx.closePath();
+        ctx.stroke();
+  
+        enable_delaunay = false;
+        enable_draw = false;
+      } catch(e){
+        alert('tente novamente');
+        console.error(e);
+      }
+
     } else {
       alert('Need 3 points!');
     }

@@ -119,6 +119,14 @@
 	bottom: 24.5rem;
  }
 
+ .voronoi {
+	bottom: 26rem;
+ }
+
+ .delaunay {
+	bottom: 27.5rem;
+ }
+
  .info {
 	top: 0;
 	right: 0;

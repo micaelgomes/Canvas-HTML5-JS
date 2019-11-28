@@ -10,6 +10,8 @@
     <main>
       <h1 class="title">myCanvas<br><small>v0.0.7</small></h1>
       <canvas id="canvas" width="650" height="550"></canvas>
+      <button class="delaunay" onclick="delaunay()">Delaunay</button>
+      <button class="voronoi" onclick="voronoi()">Voronoi</button>
       <button class="hull" onclick="findHull()">Fecho Convexo</button>
       <button class="ppolygon" onclick="selection('polygon')">pickPolygon</button>
       <button class="pline" onclick="selection('line')">pickLine</button>
@@ -36,5 +38,6 @@
     </footer>
     <script src="draw.js"></script>
     <script src="https://d3js.org/d3-polygon.v1.min.js"></script>
+    <script src="https://d3js.org/d3-voronoi.v1.min.js"></script>
   </body>
 </html>
